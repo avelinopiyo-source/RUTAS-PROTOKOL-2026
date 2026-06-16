@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Rutas - Protokol Telecom</title>
+    <style>
+        :root {
+            --primary-blue: #0A3663;       /* Azul Marino Corporativo */
+            --secondary-blue: #1E5185;     /* Azul de Acento */
+            --light-blue: #F0F4F8;         /* Fondo de Campos */
+            --bg-gradient-start: #0F2027;  /* Fondo Moderno Oscuro */
+            --bg-gradient-end: #203A43;
+            --text-dark: #1C2D42;
+            --whatsapp-green: #25D366;
+            --whatsapp-hover: #1EBE57;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--text-dark);
+            margin: 0;
+            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 550px;
+            background: #ffffff;
+            padding: 35px 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-top: 8px solid var(--primary-blue);
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand-header h2 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-header p {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            color: #657786;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--primary-blue);
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #D1DBE5;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+            color: #2C3E50;
+            background-color: var(--light-blue);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(30, 81, 133, 0.15);
+        }
+
+        /* Marcadores de posición estilizados */
+        input::placeholder,
+        textarea::placeholder {
+            color: #95A5A6;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .btn-submit {
+            background-color: var(--whatsapp-green);
+            color: #ffffff;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 12px;
+            color: #AAB8C2;
+            margin-top: 30px;
+            border-top: 1px solid #E1E8ED;
+            padding-top: 15px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="brand-header">
+        <h2>Protokol Telecom</h2>
+        <p>Control de Rutas y Logística</p>
+    </div>
+    
+    <form id="formRutas" action="https://api.sheetmonkey.io/form/hfBhEzAzFXSKvAV4VpZ5Bk" method="POST">
+        
+        <input type="hidden" id="fechaRegistro" name="Fecha">
+        <input type="hidden" id="horaRegistro" name="Hora">
+
+        <div class="form-group">
+            <label for="operador">Nombre del Operador / Técnico</label>
+            <input type="text" id="operador" name="Nombre del Operador / Usuario" placeholder="Nombre completo del técnico" required>
+        </div>
+
+        <div class="form-group">
+            <label for="acompanante">Acompañante(s)</label>
+            <input type="text" id="acompanante" name="Acompañante" placeholder="Nombre de quien acompaña (Opcional)">
+        </div>
+
+        <div class="form-group">
+            <label for="ruta">Nombre de la Ruta</label>
+            <input type="text" id="ruta" name="Nombre de la Ruta" placeholder="Ej. Enlace Central - Cerro Costoche" required>
+        </div>
+
+        <div class="form-group">
+            <label for="unidad">Unidad Asignada</label>
+            <select id="unidad" name="Unidad a tomar" required>
+                <option value="" disabled selected>Seleccione el vehículo...</option>
+                <option value="S10 RV-0200-B">S10 RV-0200-B</option>
+                <option value="NP300 RV-0199-B">NP300 RV-0199-B</option>
+                <option value="TORNADO RV-4906-B">TORNADO RV-4906-B</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tipoReporte">Tipo de Reporte</label>
+            <select id="tipoReporte" name="Tipo de Reporte" required>
+                <option value="" disabled selected>Seleccione tipo de movimiento...</option>
+                <option value="Apertura / Inicio de Ruta">Apertura / Inicio de Ruta</option>
+                <option value="Cierre - Concluida Exitosamente">Cierre - Concluida Exitosamente</option>
+                <option value="Cierre - Inconclusa / Pendiente">Cierre - Inconclusa / Pendiente</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="origen">Punto de Origen</label>
+            <input type="text" id="origen" name="Punto de Origen" placeholder="Ej. Oficina Central / Valles Centrales" required>
+        </div>
+
+        <div class="form-group">
+            <label for="destino">Punto de Destino</label>
+            <input type="text" id="destino" name="Punto de Destino" placeholder="Ej. Nodo Yagalaxi / Tamazulapam" required>
+        </div>
+
+        <div class="form-group">
+            <label for="estado">Estado de la Ruta</label>
+            <select id="estado" name="Estado de la Ruta">
+                <option value="Pendiente">Pendiente</option>
+                <option value="En tránsito">En tránsito</option>
+                <option value="Completada">Completada</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="destinatario">Notificar Reporte a:</label>
+            <select id="destinatario" required>
+                <option value="220377777195">Coordinación Técnica / Oficina</option>
+                <option value="abierto">Elegir chat o grupo manualmente en WhatsApp</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="observaciones">Observaciones / Detalles Técnicos</label>
+            <textarea id="observaciones" name="Observaciones" rows="4" placeholder="Escribe aquí novedades del trayecto, estado del clima o del nodo..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.174.001 6.161 1.24 8.407 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.597-5.339 11.945-11.89 11.945-2.005-.001-3.973-.507-5.729-1.464L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 1.975 14.067 1.053 11.45 1.051 6.012 1.051 1.59 5.421 1.586 10.85c-.001 1.686.449 3.327 1.307 4.787L1.925 21.3l5.882-1.53c-1.12.63-1.63.385-1.16-.616z"/></svg>
+            Procesar Registro y Enviar
+        </button>
+    </form>
+    
+    <div class="footer-text">Protokol Telecom &copy; 2026</div>
+</div>
+
+<script>
+    document.getElementById('formRutas').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formulario = e.target;
+        const operador = document.getElementById('operador').value;
+        const acompanante = document.getElementById('acompanante').value || "Ninguno";
+        const ruta = document.getElementById('ruta').value;
+        const unidad = document.getElementById('unidad').value;
+        const tipoReporte = document.getElementById('tipoReporte').value;
+        const origen = document.getElementById('origen').value;
+        const destino = document.getElementById('destino').value;
+        const estado = document.getElementById('estado').value;
+        const observaciones = document.getElementById('observaciones').value || "Ninguna";
+        const destinoSeleccionado = document.getElementById('destinatario').value;
+
+        // --- PROCESAMIENTO DE FECHA Y HORA AUTOMÁTICA ---
+        const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        const fechaActual = new Date();
+        
+        const diaNombre = diasSemana[fechaActual.getDay()];
+        const diaNumero = String(fechaActual.getDate()).padStart(2, '0');
+        const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+        const anio = fechaActual.getFullYear();
+        
+        // Bloqueo de autoformato numérico con comilla simple para Google Sheets
+        const fechaFormateada = `'${diaNombre} ${diaNumero}/${mes}/${anio}`;
+        
+        // Formato de hora: "16:45 hrs"
+        const hora = String(fechaActual.getHours()).padStart(2, '0');
+        const minutos = String(fechaActual.getMinutes()).padStart(2, '0');
+        const horaFormateada = `${hora}:${minutos} hrs`;
+
+        // Inyectamos valores a los campos ocultos para Google Sheets
+        document.getElementById('fechaRegistro').value = fechaFormateada;
+        document.getElementById('horaRegistro').value = horaFormateada;
+
+        // 2. ENVÍO SEGURO ASÍNCRONO A GOOGLE SHEETS
+        fetch(formulario.action, {
+            method: 'POST',
+            body: new FormData(formulario)
+        })
+        .then(() => {
+            console.log('Datos registrados con éxito en Google Sheets.');
+        })
+        .catch((error) => {
+            console.error('Error al guardar en la hoja de cálculo:', error);
+        });
+
+        // --- ASIGNACIÓN DE ICONOS SEGÚN EL REPORTE ---
+        let iconoReporte = "📌";
+        if (tipoReporte.includes("Exitosamente")) iconoReporte = "✅";
+        if (tipoReporte.includes("Inconclusa")) iconoReporte = "⚠️";
+
+        // 3. ESTRUCTURACIÓN DEL MENSAJE CORPORATIVO DE WHATSAPP
+        const textoMensaje = `*${iconoReporte} DETALLE DE RUTA: ${tipoReporte.toUpperCase()}*\n` +
+                             `----------------------------------------\n` +
+                             `*📅 Fecha:* ${diaNombre} ${diaNumero}/${mes}/${anio}\n` +
+                             `*🕒 Hora:* ${horaFormateada}\n` +
+                             `*👤 Técnico:* ${operador}\n` +
+                             `*👥 Acompañante:* ${acompanante}\n` +
+                             `*🗺️ Ruta:* ${ruta}\n` +
+                             `*🛻 Unidad:* ${unidad}\n` +
+                             `*📍 Origen:* ${origen}\n` +
+                             `*🏁 Destino:* ${destino}\n` +
+                             `*⚡ Estado Actual:* ${estado}\n` +
+                             `*📝 Obs:* ${observaciones}`;
+
+        const mensajeFormateado = encodeURIComponent(textoMensaje);
+        let urlWhatsApp = "";
+
+        // 4. DIRECCIONAMIENTO DE WHATSAPP
+        if (destinoSeleccionado === "abierto") {
+            urlWhatsApp = `https://api.whatsapp.com/send?text=${mensajeFormateado}`;
+        } else {
+            urlWhatsApp = `https://api.whatsapp.com/send?phone=${destinoSeleccionado}&text=${mensajeFormateado}`;
+        }
+
+        // 5. EJECUCIÓN DE REDIRECCIÓN
+        window.open(urlWhatsApp, '_blank');
+
+        // 6. REINICIO DE CAMPOS
+        formulario.reset();
+    });
+</script>
+
+</body>
+</html>
